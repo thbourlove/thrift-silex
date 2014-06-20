@@ -41,7 +41,7 @@ class ThriftServiceProvider implements ServiceProviderInterface
 
                 $class = $config['client'];
 
-                $clients[$service] = $clients->share(function ($clients) use ($protocol, $class) {
+                $clients[$service] = $clients->share(function () use ($protocol, $class) {
                     return new $class($protocol);
                 });
             }
