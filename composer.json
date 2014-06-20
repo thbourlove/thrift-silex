@@ -1,0 +1,26 @@
+{
+    "name": "eleme/thrift-silex",
+    "description": "thrift service provider for silex",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Hongbo Tang",
+            "email": "thbourlove@gmail.com"
+        }
+    ],
+    "require": {
+        "eleme/thrift-php": "~0.9",
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "silex/silex": "~1.1",
+        "phpunit/phpunit": "~4.0",
+        "satooshi/php-coveralls": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Eleme\\Thrift\\Provider\\Silex\\": "src/",
+            "Eleme\\Thrift\\Tests\\Provider\\Silex\\": "tests/"
+        }
+    }
+}
