@@ -8,6 +8,7 @@ php:
 
 before_script:
   - ./tests/travis_test_helpers.sh
+  - phpenv config-add ./tests/test_helpers.ini
   - composer self-update
   - composer install
 
