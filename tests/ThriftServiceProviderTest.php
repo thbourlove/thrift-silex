@@ -10,6 +10,7 @@ class ThriftServiceProviderTest extends PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
+        dl('test_helpers.so');
         $this->getMock(
             'Thrift\Transport\TBufferedTransport',
             array('open'),
