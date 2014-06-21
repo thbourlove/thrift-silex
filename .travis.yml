@@ -10,10 +10,10 @@ before_script:
   - ./tests/travis_test_helpers.sh
   - phpenv config-add ./tests/test_helpers.ini
   - composer self-update
-  - composer install
+  - composer install --no-interaction --prefer-source --dev
 
 script:
-  - phpunit --coverage-clover=coverage.clover
+  - vendor/bin/phpunit --coverage-clover=coverage.clover
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
