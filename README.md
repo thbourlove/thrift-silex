@@ -15,3 +15,24 @@ thrift service provider for silex framework.
 ```
 
 ## Example:
+```php
+use Silex\Application;
+use Eleme\Thrift\Provider\Silex\ThriftServiceProvider;
+
+$app = new Application;
+$app->register(new ThriftServiceProvider);
+$app['thrift.options'] = array(
+    'foo' => array(
+        'server' => 'foo_host',
+        'port' => 12345,
+        'client' => 'FooClient'
+    ),
+    'bar' => array(
+        'server' => 'bar_host',
+        'port' => 12346,
+        'client' => 'BarClient'
+    ),
+);
+$app['thrift.clients']['foo']->api();
+$app['thrift.clients']['bar']->api();
+```
