@@ -27,22 +27,20 @@ class ThriftServiceProvider implements ServiceProviderInterface
             foreach ($app['thrift.options'] as $service => $option) {
                 $config = array_merge($app['thrift.default_option'], $option);
 
-                $socket = new TSocket($config['server'], $config['port'], $config['persist']);
-                $socket->setRecvTimeout($config['receive_timeout']);
-                $socket->setSendTimeout($config['send_timeout']);
+                $clients[$service] = $clients->share(function () use ($config) {
+                    $socket = new TSocket($config['server'], $config['port'], $config['persist']);
+                    $socket->setRecvTimeout($config['receive_timeout']);
+                    $socket->setSendTimeout($config['send_timeout']);
 
-                $transport = new TBufferedTransport($socket, $config['read_buf_size'], $config['write_buf_size']);
-                $transport->open();
-                if (!$config['persist']) {
-                    register_shutdown_function(array($transport, "close"));
-                }
+                    $transport = new TBufferedTransport($socket, $config['read_buf_size'], $config['write_buf_size']);
+                    $transport->open();
+                    if (!$config['persist']) {
+                        register_shutdown_function(array($transport, "close"));
+                    }
 
-                $protocol = new TBinaryProtocolAccelerated($transport);
+                    $protocol = new TBinaryProtocolAccelerated($transport);
 
-                $class = $config['client'];
-
-                $clients[$service] = $clients->share(function () use ($protocol, $class) {
-                    return new $class($protocol);
+                    return new $config['client']($protocol);
                 });
             }
             return $clients;
