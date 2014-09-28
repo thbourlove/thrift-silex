@@ -16,8 +16,8 @@ class ThriftServiceProvider implements ServiceProviderInterface
 
         $app['thrift.default_option'] = array(
             'persist' => false,
-            'receive_timeout' => 30000,
-            'send_timeout' => 10000,
+            'receive_timeout' => 3000,
+            'send_timeout' => 1000,
             'read_buf_size' => 1024,
             'write_buf_size' => 1024,
         );
